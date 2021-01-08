@@ -1,6 +1,8 @@
 <?php
 
 use Inertia\Inertia;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\FrontController;
@@ -25,6 +27,10 @@ use App\Http\Controllers\Admin\BusinessCategoryController;
 //         'laravelVersion' => Application::VERSION,
 //     ]);
 // });
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
 Route::get('/', [FrontController::class, 'welcome'])->name('welcome');
 Route::get('/listings/search', [FrontController::class, 'search']);
